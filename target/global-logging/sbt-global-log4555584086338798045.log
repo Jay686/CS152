@@ -1,0 +1,6 @@
+[debug] > Exec(console, None, None)
+[debug] Evaluating tasks: Compile / console
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] Non-compiled module 'compiler-bridge_2.13' for Scala 2.13.4. Compiling...
+[info]   Compilation completed in 19.84s.
+[info] Starting scala interpreter...

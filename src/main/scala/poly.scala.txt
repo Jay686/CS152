@@ -1,0 +1,15 @@
+
+
+object poly {
+  
+  def roots(p: (Double, Double, Double)): Option[(Double, Double)] = {
+    // = None if p has no real roots
+    // = Some((r1, r2)) where p(r1) == p(r2) == 0
+  }
+  
+  def deriv(p: (Double, Double, Double)): (Double, Double, Double) = 
+    // = derivative of p (which should be degree 1
+    
+  def eval(a: Double, p: (Double, Double, Double)): Double = 
+    // = p(a)
+}

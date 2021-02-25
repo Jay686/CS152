@@ -1,0 +1,1 @@
+def apply(f: String=>String) = f("Mississippi")
