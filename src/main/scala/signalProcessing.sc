@@ -40,6 +40,6 @@ def  duration(score: List[Note])
 = score.map(_.duration).filter(0 < _).reduce(_ + _)
 
 def maxAmp(score: List[Note]) =
-  score.map(x => x).filter(_.duration > 0).map(_.amplitude).reduce(math.max(_, _))
+  score.filter(_.duration > 0).map(_.amplitude).reduce(math.max(_, _))
 
 maxAmp(symphony1)
