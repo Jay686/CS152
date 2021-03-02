@@ -33,13 +33,43 @@ def duration(score: List[Note]) = {
 def sum(a: Double, b: Double) = a + b
 def getDuration(n: Note) = n.duration
 def isPositive(dur: Double) = 0 < dur
-def  duration(score: List[Note])
+def duration(score: List[Note])
 = score.map(getDuration).filter(isPositive).reduce(sum)
 // Or
-def  duration(score: List[Note])
+def duration(score: List[Note])
 = score.map(_.duration).filter(0 < _).reduce(_ + _)
 
 def maxAmp(score: List[Note]) =
   score.filter(_.duration > 0).map(_.amplitude).reduce(math.max(_, _))
 
 maxAmp(symphony1)
+
+// fetch member at a given position
+def get[T](pos: Int, vals: List[T]): T = {
+  if (vals == Nil) throw new Exception("List is too short");
+  if (pos < 0) throw new Exception("position must not be negative");
+  if (pos == 0) vals.head else get(pos - 1, vals.tail)
+}
+
+// search for an element
+def member[T](elem: T, vals: List[T]): Boolean = {
+  if (vals == Nil) false
+  else if (elem == vals.head) true
+  else member(elem, vals.tail)
+}
+
+// add an element at a given position
+def add[T](elem: T, pos: Int, vals: List[T]): List[T] = {
+  if (vals == Nil && pos > 0) throw new Exception("List is too short");
+  if (pos < 0) throw new Exception("position must not be negative");
+  if (pos == 0) elem:: vals
+  else vals.head::add(elem, pos - 1, vals.tail)
+}
+
+// remove element t a given position
+def rem[T](pos: Int, vals: List[T]): List[T] = {
+  if (vals == Nil) throw new Exception("List is too short");
+  if (pos < 0) throw new Exception("position must not be negative");
+  if (pos == 0) vals.tail
+  else vals.head::rem(pos - 1, vals.tail)
+}
