@@ -1,8 +1,0 @@
-[debug] > Exec(repl, None, None)
-[error] Not a valid command: repl (similar: reload, eval, help)
-[error] Not a valid project ID: repl
-[error] Expected ':'
-[error] Not a valid key: repl (similar: ps)
-[error] repl
-[error]     ^
-[debug] > Exec(idea-shell, None, None)
