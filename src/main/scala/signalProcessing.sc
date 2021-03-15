@@ -42,7 +42,14 @@ def duration(score: List[Note])
 def maxAmp(score: List[Note]) =
   score.filter(_.duration > 0).map(_.amplitude).reduce(math.max(_, _))
 
+def maxAmpTail(score: List[Note], r: Double = 0.0): Double = {
+  if(score == Nil) r
+  else if(score.head.duration > 0) maxAmpTail(score.tail, math.max(r, score.head.amplitude))
+  else maxAmpTail(score.tail, r)
+}
+
 maxAmp(symphony1)
+maxAmpTail(symphony1)
 
 // fetch member at a given position
 def get[T](pos: Int, vals: List[T]): T = {
@@ -73,3 +80,11 @@ def rem[T](pos: Int, vals: List[T]): List[T] = {
   if (pos == 0) vals.tail
   else vals.head::rem(pos - 1, vals.tail)
 }
+
+def makeFibs(fib1: Int, fib2: Int): LazyList[Int] = fib1 #:: makeFibs(fib2, fib1 + fib2)
+
+val fib = makeFibs(1, 1)
+
+fib(44).toBinaryString
+fib(45).toBinaryString
+fib(46).toBinaryString

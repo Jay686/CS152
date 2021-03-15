@@ -56,14 +56,14 @@ def sumOfSumsIte(vals: List[List[Int]]) = {
 def sumOfSumsRec(vals: List[List[Int]]): Int =
   if(vals == Nil) 0
   else if(vals.head != Nil)
-    vals.head.sum + sumOfSumsRec(vals.tail)
+    vals.head.reduce(_ + _) + sumOfSumsRec(vals.tail)
   else sumOfSumsRec(vals.tail)
 
 // Tail-recursive version
 def sumOfSumsTailRec(vals: List[List[Int]], result: Int = 0): Int = {
   if (vals == Nil) result
   else if(vals.head != Nil)
-    sumOfSumsTailRec(vals.tail, result + vals.head.sum)
+    sumOfSumsTailRec(vals.tail, result + vals.head.reduce(_ + _))
   else sumOfSumsTailRec(vals.tail, result)
 }
 
@@ -170,22 +170,30 @@ val res19: Boolean = false
  */
 
 // 13.
-def sFrom(a: Int, f: Int => Int): Stream[Int] = a #:: sFrom(f(a), f)
-val s1 = sFrom(1: Int,(b: Int) => b)
-val s2 = sFrom(0: Int,(b: Int) => b + 1)
-val s3 = sFrom(0: Int,(b: Int) => b + 2)
-val s4 = 0 #:: sFrom(1: Int, (b: Int) => (math.sqrt(b).toInt + 1) * (math.sqrt(b).toInt + 1))
+def sFrom[T](a: T, f: T => T): LazyList[T] = a #:: sFrom(f(a), f)
+val s1 = sFrom(1, (b: Int) => b)
+val s2 = sFrom(0, (b: Int) => b + 1)
+val s3 = s2.filter(_ % 2 == 0)
+val s4 = s2.map(a => a * a)
 
-s1.take(8).toList
-s2.take(8).toList
-s3.take(8).toList
-s4.take(8).toList
+s1(8)
+s1
+s2(8)
+s2
+s3(8)
+s3
+s4(8)
+s4
 
 /*
-val res20: List[Int] = List(1, 1, 1, 1, 1, 1, 1, 1)
-val res21: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7)
-val res22: List[Int] = List(0, 2, 4, 6, 8, 10, 12, 14)
-val res23: List[Int] = List(0, 1, 4, 9, 16, 25, 36, 49)
+val res20: Int = 1
+val res21: LazyList[Int] = LazyList(1, 1, 1, 1, 1, 1, 1, 1, 1, <not computed>)
+val res22: Int = 8
+val res23: LazyList[Int] = LazyList(0, 1, 2, 3, 4, 5, 6, 7, 8, <not computed>)
+val res24: Int = 16
+val res25: scala.collection.immutable.LazyList[Int] = LazyList(0, 2, 4, 6, 8, 10, 12, 14, 16, <not computed>)
+val res26: Int = 64
+val res27: scala.collection.immutable.LazyList[Int] = LazyList(0, 1, 4, 9, 16, 25, 36, 49, 64, <not computed>)
  */
 
 // 15.
