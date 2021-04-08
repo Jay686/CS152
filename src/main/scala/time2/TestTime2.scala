@@ -21,3 +21,10 @@ t1 < t2 = true
 java.lang.IllegalArgumentException
  */
 }
+
+object Main extends App {
+  for{
+    x <- 1 to 5
+    _ = print(x)
+  } print(x)
+}
